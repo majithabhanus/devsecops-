@@ -87,3 +87,31 @@ jobs:
           severity: CRITICAL,HIGH
           exit-code: 1
           ignore-unfixed: true
+
+# 5. Deploy to Kubernetes via GitOps
+  k8s-deploy:
+    needs: trivy-scan
+    runs-on: ubuntu-latest
+
+    env:
+    IMAGE: ghcr.io/${{ github.repository }}:${{ github.run_number }}
+
+    steps:
+      - name: Checkout GitOps Repo
+        uses: actions/checkout@v4
+        with:
+        repository: <your-username>/k8s-manifests
+        token: ${{ secrets.GIT_TOKEN }}
+
+      - name: Update image tag in deployment
+        run: |
+         sed -i "s|image: .*|image: $IMAGE|" deployment.yaml
+
+      - name: Commit & push changes
+        run: |
+         git config user.name "github-actions"
+         git config user.email "github-actions@github.com"
+         git add deployment.yaml
+         git commit -m "Deploy image $IMAGE"
+         git Push
+
