@@ -10,10 +10,6 @@ permissions:
   contents: read
   packages: write   # REQUIRED for GHCR
 
-permissions:
-  contents: read
-  packages: write   # REQUIRED for GHCR
-
 jobs:
   # 1. Unit Tests
   test:
