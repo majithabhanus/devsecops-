@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-    workflow_dispatch:
+  workflow_dispatch:
 permissions:
   contents: read
   packages: write   # REQUIRED for GHCR
@@ -90,17 +90,18 @@ jobs:
 
 # 5. Deploy to Kubernetes via GitOps
   k8s-deploy:
-    needs: trivy-scan
+    needs: trivy
     runs-on: ubuntu-latest
-
+   
     env:
-    IMAGE: ghcr.io/${{ github.repository }}:${{ github.run_number }}
+    IMAGE: ghcr.io/${{ github.repository_owner }}/simple-frontend:${{ github.sha }}
+
 
     steps:
       - name: Checkout GitOps Repo
         uses: actions/checkout@v4
         with:
-        repository: <your-username>/k8s-manifests
+        repository: majithabhanus/k8s-manifests
         token: ${{ secrets.GIT_TOKEN }}
 
       - name: Update image tag in deployment
@@ -113,5 +114,5 @@ jobs:
          git config user.email "github-actions@github.com"
          git add deployment.yaml
          git commit -m "Deploy image $IMAGE"
-         git Push
+         git push
 
