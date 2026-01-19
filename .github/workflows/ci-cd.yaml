@@ -101,7 +101,7 @@ jobs:
       - name: Checkout GitOps Repo
         uses: actions/checkout@v4
         with:
-          repository: <your-username>/k8s-manifests
+          repository: majithabhanus/k8s-manifests
           token: ${{ secrets.GIT_TOKEN }}
 
       - name: Update image tag in deployment
