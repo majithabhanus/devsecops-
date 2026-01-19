@@ -102,7 +102,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: majithabhanus/devsecops-
-          token: ${{ secrets.DEVSECOPSTOKEN }}
+          token: ${{ secrets.DEVSECOPS}}
       - name: List repo files
         run: ls -R
       - name: Update image tag in deployment
