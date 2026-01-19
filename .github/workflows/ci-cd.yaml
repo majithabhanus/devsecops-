@@ -106,7 +106,7 @@ jobs:
 
       - name: Update image tag in deployment
         run: |
-          sed -i "s|image: .*|image: $IMAGE|" kubernetes/deployment.yaml
+          sed -i "s|image: .*|image: $IMAGE|" devsecops-/kubernetes/deployment.yaml
 
       - name: Commit & push changes
         run: |
