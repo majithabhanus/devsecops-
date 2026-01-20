@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: simplefrontend
-          image: ghcr.io/majithabhanus/simple-frontend:3822b4228517d0640eb3167530c480a6d6d361d3
+          image: ghcr.io/majithabhanus/simple-frontend:f494a170083945f40df292f4f174aadabe125f8e
           imagePullPolicy: Always
           ports:
             - containerPort: 80
